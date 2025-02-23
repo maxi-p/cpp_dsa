@@ -3,6 +3,8 @@
 #include<algorithm>
 #include<sstream>
 #include<vector>
+#include<cstring>
+#include<cctype>
 
 int main() {
     // initializing strings
@@ -17,9 +19,12 @@ int main() {
     // accessing characters of strings
     char ch = str2[2];
     char ch2 = str2.at(1);
-
     std::cout << "Char at index 2 is: " << ch << std::endl;
     std::cout << "Char at index 1 is: " << ch2 << std::endl;
+
+    // modifying the characters of a string
+    str3[0] = 'B';
+    std::cout << str3 << std::endl;
 
     // concatenating the strings
     std::cout << "Before: " << str2 << std::endl;
@@ -41,7 +46,7 @@ int main() {
     str2.replace(0, 5, "Hi");
     std::cout << "After: " << str2 << std::endl;
 
-    // Getting the size and isempty
+    // Getting the size and checking is empty
     std::cout << "Size: " << str2.size() << std::endl;
     std::cout << "Is empty: " << str2.empty() << std::endl;
 
@@ -61,14 +66,32 @@ int main() {
     int num1 = std::stoi("123");
 
     // string to float
-    int num2 = std::stof("3.14");
+    float num2 = std::stof("3.14");
 
     // num to string
     std::string str4 = std::to_string(123);
     std::cout << (str4 += " string") << std::endl;
 
+    // is alpha numberic
+    int isalnum = std::isalnum('h');
+    std::cout << "Is alnum: (h) " << isalnum << std::endl;
+    isalnum = std::isalnum(';');
+    std::cout << "Is alnum: (;) " << isalnum << std::endl;
+
+    // is alphabetic
+    int isalpha = std::isalpha('f');
+    std::cout << "Is alpha (f) : " << isalpha << std::endl;
+    isalpha = std::isalpha('1');
+    std::cout << "Is alpha (1) : " << isalpha << std::endl;
+
+    // is numberic
+    int isdigit = std::isdigit('1');
+    std::cout << "is num (1): " << isdigit << std::endl;
+    isdigit = std::isdigit('f');
+    std::cout << "is num (f): " << isdigit << std::endl;
+
     // Searching a substring
-    size_t found = str2.find("World");  // Returns the index of the first occurrence
+    size_t found = str2.rfind("World");  // Returns the index of the first occurrence
     if (found != std::string::npos) { // Returns std::string::npos if not found
         std::cout << "'World' found at index " << found << std::endl;
     }
@@ -80,8 +103,8 @@ int main() {
     // splitting by a given delimiter
     std::cout << "Splitting string by a delimiter (\",\")" << std::endl;
     
-    std::string words = "one, two, three, four";
-    char delimiter = ',';
+    std::string words = "one two three four\n five six seven";
+    char delimiter = ' ';
     std::stringstream my_stream(words);
 
     std::vector<std::string> words_vec;
@@ -94,6 +117,28 @@ int main() {
     for (auto& word : words_vec) {
         std::cout << word << std::endl;
     }
+
+    // converting to c-style stirng
+    const char* cstr = str2.c_str();
+    
+    for (int i = 0; cstr[i] != '\0'; i++) {
+        std::cout << cstr[i];
+    }
+    std::cout << std::endl;
+
+    // converting non constant
+    std::string str5 = "Hi world";
+
+    char cstr2[str5.length() + 1];
+
+    std::strcpy(cstr2, str5.c_str());
+
+    cstr2[3] = 'M';
+
+    for (int i = 0; cstr2[i] != '\0'; i++) {
+        std::cout << cstr2[i];
+    }
+    std::cout << std::endl;
 
     return 0;
 }

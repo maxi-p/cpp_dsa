@@ -6,3 +6,6 @@ out/*
 
 # mac
 **/.DS_Store
+
+# Files
+**/*.txt
